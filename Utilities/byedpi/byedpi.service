@@ -1,0 +1,14 @@
+[Unit]
+Description=ByeDPI service
+After=network.target
+
+[Service]
+ExecStart=/home/phosphorus/.bin/byedpi --fake 1 --disorder 3 --auto=torst --tlsrec 1+s -p 5244
+Type=simple
+Restart=always
+
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target
+

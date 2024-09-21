@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Получаем текущее состояние тачпада (enabled/disabled)
+current_state=$(gsettings get org.gnome.desktop.peripherals.touchpad send-events)
+
+# Если тачпад включен, отключаем его, иначе включаем
+if [[ "$current_state" == "'enabled'" ]]; then
+    gsettings set org.gnome.desktop.peripherals.touchpad send-events 'disabled'
+#   notify-send "Тачпад отключен"
+else
+    gsettings set org.gnome.desktop.peripherals.touchpad send-events 'enabled'
+#   notify-send "Тачпад включен"
+fi
+
