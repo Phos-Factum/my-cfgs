@@ -35,7 +35,9 @@ alias c='cd'
 alias c..='cd ..'
 alias c/='cd /'
 alias c-='cd -'
+alias s='cat'
 alias md='mkdir'
+alias m='mv'
 alias s!='sudo !!'
 alias dcd='cd /etc/systemd/system/; ls'
 alias dls='ls /etc/systemd/system/'
@@ -77,9 +79,12 @@ alias pdf='zathura'
 
 ## Git
 alias gita='git add'
+alias gita.='git add .'
 alias gitd='git diff'
 alias gitb='git branch'
 alias gitc='git commit'
+alias gitc-m='git commit -m'
+alias gitc--amend='git commit --amend'
 alias gits='git status'
 #
 alias gitlog='git log'
@@ -96,6 +101,9 @@ alias gitch='git checkout'
 alias py='python3'
 alias newvenv='python3 -m venv .venv'
 alias actvenv='source .venv/bin/activate'
+
+# Else
+alias make='make; make clean'  # makefiles make and clean at one action
 
 ### Paths ###
 

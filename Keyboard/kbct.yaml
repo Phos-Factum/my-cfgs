@@ -10,11 +10,11 @@
     # Specify the modifiers of the layer
     - modifiers: ['rightalt']
       keymap:
-        i: up
+        k: up
         j: left
-        k: down
+        j: down
         l: right
         u: pageup
-        o: pagedown
-        p: home
-        semicolon: end
+        d: pagedown
+        G: home
+        gg: end
