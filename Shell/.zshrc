@@ -63,10 +63,13 @@ alias dstart='sudo systemctl start'
 alias dstatus='sudo systemctl status'
 alias denable='sudo systemctl enable'
 alias ddisable='sudo systemctl disable'
+alias vpnon='adguardvpn-cli connect'
+alias vpnoff='adguardvpn-cli disconnect'
 
 # Utilities
 alias uz='tar -xzf'
 alias wifi='nmcli dev wifi connect'
+alias ph='viewnior'
 
 # Office 
 alias writer='loffice'
@@ -103,7 +106,7 @@ alias newvenv='python3 -m venv .venv'
 alias actvenv='source .venv/bin/activate'
 
 # Else
-alias make='make; make clean'  # makefiles make and clean at one action
+# alias make='make; make clean'  # makefiles make and clean at one action
 
 ### Paths ###
 
