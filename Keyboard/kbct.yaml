@@ -6,15 +6,15 @@
     capslock: backspace
     compose: esc
   # Specify layered configurations (much similar to fn+F keys)
-  layers:
-    # Specify the modifiers of the layer
-    - modifiers: ['rightalt']
-      keymap:
-        k: up
-        j: left
-        j: down
-        l: right
-        u: pageup
-        d: pagedown
-        G: home
-        gg: end
+#  layers:
+#    # Specify the modifiers of the layer
+#    - modifiers: ['rightalt']
+#      keymap:
+#        k: up
+#        h: left
+#        j: down
+#        l: right
+#        u: pageup
+#        d: pagedown
+#        G: home
+#        gg: end
