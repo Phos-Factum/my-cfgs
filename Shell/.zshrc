@@ -17,7 +17,7 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   exec tmux
 fi
 
-### Exports ###
+### Exports ##
 
 export EDITOR=/usr/bin/vim
 
@@ -65,11 +65,13 @@ alias denable='sudo systemctl enable'
 alias ddisable='sudo systemctl disable'
 alias vpnon='adguardvpn-cli connect'
 alias vpnoff='adguardvpn-cli disconnect'
+alias vpn='adguardvpn-cli status'
 
 # Utilities
-alias uz='tar -xzf'
+alias untar='tar -zxvf'
 alias wifi='nmcli dev wifi connect'
 alias ph='viewnior'
+alias gdb='gdb -x ~/.gdbinit'
 
 # Office 
 alias writer='loffice'
@@ -105,10 +107,36 @@ alias py='python3'
 alias newvenv='python3 -m venv .venv'
 alias actvenv='source .venv/bin/activate'
 
+# System utilities
+alias chx='chmod +x'        # won't work on local user's cfg
+alias ch37='chmod 777'      # same
+alias um='uname -m'
+
 # Else
-# alias make='make; make clean'  # makefiles make and clean at one action
+alias mc='make; make clean'  # makefiles make and clean at one action
+alias moc='make clean'       # make only clean
+
+# Lmao aliases
+alias zshcp='cp ~/.zshrc ~/.my-cfgs/Shell/'
+alias bashcp='cp ~/.bashrc ~/.my-cfgs/Shell/'
+alias shellcp='zshcp; bashcp'
 
 ### Paths ###
 
 PATH=${PATH}:~/.bin
 export PATH
+
+
+function pomo() {
+    arg1=$1
+    shift
+    args="$*"
+
+    min=${arg1:?Example: pomo 15 Take a break}
+    sec=$((min * 60))
+    msg="${args:?Example: pomo 15 Take a break}"
+
+    while true; do
+        sleep "${sec:?}" && echo "${msg:?}" && notify-send -u critical -t 0 "${msg:?}"
+    done
+}

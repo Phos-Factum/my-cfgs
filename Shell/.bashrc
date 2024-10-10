@@ -6,42 +6,43 @@
 [[ $- != *i* ]] && return
 
 colors() {
-	local fgc bgc vals seq0
+    local fgc bgc vals seq0
 
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
 
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
+    # foreground colors
+    for fgc in {30..37}; do
+        # background colors
+        for bgc in {40..47}; do
+            fgc=${fgc#37} # white
+            bgc=${bgc#40} # black
 
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
+            vals="${fgc:+$fgc;}${bgc}"
+            vals=${vals%%;}
 
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
+            seq0="${vals:+\e[${vals}m}"
+            printf "  %-9s" "${seq0:-(default)}"
+            printf " ${seq0}TEXT\e[m"
+            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+        done
+        echo
+        echo
+    done
 }
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Change the window title of X terminals
 case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
+xterm* | rxvt* | Eterm* | aterm | kterm | gnome* | interix | konsole*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+    ;;
+screen*)
+    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+    ;;
 esac
 
 use_color=true
@@ -51,53 +52,135 @@ use_color=true
 # instead of using /etc/DIR_COLORS.  Try to use the external file
 # first to take advantage of user additions.  Use internal bash
 # globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
+safe_term=${TERM//[^[:alnum:]]/?} # sanitize TERM
 match_lhs=""
-[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
+[[ -f ~/.dir_colors ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
 [[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs}    ]] \
-	&& type -P dircolors >/dev/null \
-	&& match_lhs=$(dircolors --print-database)
+[[ -z ${match_lhs} ]] &&
+    type -P dircolors >/dev/null &&
+    match_lhs=$(dircolors --print-database)
 [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
 
-if ${use_color} ; then
-	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-		if [[ -f ~/.dir_colors ]] ; then
-			eval $(dircolors -b ~/.dir_colors)
-		elif [[ -f /etc/DIR_COLORS ]] ; then
-			eval $(dircolors -b /etc/DIR_COLORS)
-		fi
-	fi
+if ${use_color}; then
+    # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+    if type -P dircolors >/dev/null; then
+        if [[ -f ~/.dir_colors ]]; then
+            eval $(dircolors -b ~/.dir_colors)
+        elif [[ -f /etc/DIR_COLORS ]]; then
+            eval $(dircolors -b /etc/DIR_COLORS)
+        fi
+    fi
 
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
+    if [[ ${EUID} == 0 ]]; then
+        PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
+    else
+        PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+    fi
 
-	alias ls='ls --color=auto'
-	alias grep='grep --colour=auto'
-	alias egrep='egrep --colour=auto'
-	alias fgrep='fgrep --colour=auto'
+    alias ls='ls --color=auto'
+    alias grep='grep --colour=auto'
+    alias egrep='egrep --colour=auto'
+    alias fgrep='fgrep --colour=auto'
 else
-	if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
-	else
-		PS1='\u@\h \w \$ '
-	fi
+    if [[ ${EUID} == 0 ]]; then
+        # show root@ when we don't have colors
+        PS1='\u@\h \W \$ '
+    else
+        PS1='\u@\h \w \$ '
+    fi
 fi
 
 unset use_color safe_term match_lhs sh
 
-#alias cp="cp -i"                          # confirm before overwriting something
-#alias df='df -h'                          # human-readable sizes
-#alias free='free -m'                      # show sizes in MB
-#alias np='nano -w PKGBUILD'
-#alias more=less
+### Aliases ###
 
-xhost +local:root > /dev/null 2>&1
+# Commands
+alias rmrf='rm -rf'
+alias rd='rmdir'
+alias lla='ls -la'
+alias ll='ls -l'
+alias la='ls -a'
+alias l='ls'
+alias c='cd'
+alias c..='cd ..'
+alias c/='cd /'
+alias c-='cd -'
+alias s='cat'
+alias md='mkdir'
+alias m='mv'
+alias s!='sudo !!'
+alias dcd='cd /etc/systemd/system/; ls'
+alias dls='ls /etc/systemd/system/'
+
+# Configs
+alias zshrc='vim ~/.zshrc; source ~/.zshrc'
+alias bashrc='vim ~/.bashrc; source ~/.bashrc'
+alias tmuxrc='vim ~/.tmux.conf; source ~/.tmux.conf'
+
+# Package managers
+alias yi='yay -S'
+alias yu='yay -Syu'
+alias yd='yay -Rs'
+alias ydc='yay -Rns'
+alias pi='sudo pacman -S'
+alias pu='sudo pacman -Syu'
+alias pd='sudo pacman -Rs'
+alias pdc='sudo pacman -Rns'
+
+# Daemons
+alias dreload='sudo systemctl daemon-reload'
+alias dstart='sudo systemctl start'
+alias dstatus='sudo systemctl status'
+alias denable='sudo systemctl enable'
+alias ddisable='sudo systemctl disable'
+alias vpnon='adguardvpn-cli connect'
+alias vpnoff='adguardvpn-cli disconnect'
+
+# Utilities
+alias uz='tar -xzf'
+alias wifi='nmcli dev wifi connect'
+alias ph='viewnior'
+alias df='df -h'
+alias free='free -m'
+
+# Office
+alias writer='loffice'
+alias impress='loimpress'
+alias calc='localc'
+alias math='lomath'
+alias base='lobase'
+alias draw='lodraw'
+alias pdf='zathura'
+
+## Git
+alias gita='git add'
+alias gita.='git add .'
+alias gitd='git diff'
+alias gitb='git branch'
+alias gitc='git commit'
+alias gitc-m='git commit -m'
+alias gitc--amend='git commit --amend'
+alias gits='git status'
+#
+alias gitlog='git log'
+alias gitrm='git rm'
+alias gitmv='git mv'
+alias gitclean='git clean'
+alias gitpush='git push'
+alias gitfpush='git push -f'
+alias gitpull='git pull'
+alias gitsw='git switch'
+alias gitch='git checkout'
+
+# Python
+alias py='python3'
+alias newvenv='python3 -m venv .venv'
+alias actvenv='source .venv/bin/activate'
+
+# Else
+# alias make='make; make clean'  # makefiles make and clean at one action
+
+xhost +local:root >/dev/null 2>&1
 
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
@@ -111,4 +194,3 @@ shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
-
