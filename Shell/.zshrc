@@ -17,12 +17,12 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   exec tmux
 fi
 
-### Exports ##
+### Exports ###
 
 export EDITOR=/usr/bin/vim
 
 
-### Aliases ###
+##### Aliases #####
 
 # Commands
 alias rmrf='rm -rf'
@@ -43,8 +43,8 @@ alias dcd='cd /etc/systemd/system/; ls'
 alias dls='ls /etc/systemd/system/'
 
 # Configs
-alias zshrc='vim ~/.zshrc; source ~/.zshrc'
-alias bashrc='vim ~/.bashrc; source ~/.bashrc'
+alias z='vim ~/.zshrc; source ~/.zshrc; zshcp'
+alias bashrc='vim ~/.bashrc; source ~/.bashrc; bashcp'
 alias tmuxrc='vim ~/.tmux.conf; source ~/.tmux.conf'
 
 # Package managers
@@ -67,11 +67,23 @@ alias vpnon='adguardvpn-cli connect'
 alias vpnoff='adguardvpn-cli disconnect'
 alias vpn='adguardvpn-cli status'
 
-# Utilities
+##  Utilities ##
 alias untar='tar -zxvf'
 alias wifi='nmcli dev wifi connect'
 alias ph='viewnior'
 alias gdb='gdb -x ~/.gdbinit'
+alias g='gdb'
+
+# Pomodoro
+alias p='pomodoro'
+alias pstart='pomodoro start --duration'
+alias pstop='pomodoro finish'
+alias pcan='pomodoro cancel'
+alias pstatus='pomodoro status'
+alias pbreak='pomodoro break'
+alias prepeat='pomodoro repeat'
+
+################
 
 # Office 
 alias writer='loffice'
@@ -82,7 +94,9 @@ alias base='lobase'
 alias draw='lodraw'
 alias pdf='zathura'
 
-## Git
+## Git ##
+
+# Git (short)
 alias gita='git add'
 alias gita.='git add .'
 alias gitd='git diff'
@@ -91,7 +105,8 @@ alias gitc='git commit'
 alias gitc-m='git commit -m'
 alias gitc--amend='git commit --amend'
 alias gits='git status'
-#
+
+# Git (less short :D)
 alias gitlog='git log'
 alias gitrm='git rm'
 alias gitmv='git mv'
@@ -101,6 +116,8 @@ alias gitfpush='git push -f'
 alias gitpull='git pull'
 alias gitsw='git switch'
 alias gitch='git checkout'
+
+#########
 
 # Python
 alias py='python3'
