@@ -43,9 +43,9 @@ alias dcd='cd /etc/systemd/system/; ls'
 alias dls='ls /etc/systemd/system/'
 
 # Configs
-alias z='vim ~/.zshrc; source ~/.zshrc; zshcp'
-alias bashrc='vim ~/.bashrc; source ~/.bashrc; bashcp'
-alias tmuxrc='vim ~/.tmux.conf; source ~/.tmux.conf'
+alias z='nvim ~/.zshrc; source ~/.zshrc; zshcp'
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc; bashcp'
+alias tmuxrc='nvim ~/.tmux.conf; source ~/.tmux.conf'
 
 # Package managers
 alias yi='yay -S'
@@ -68,8 +68,6 @@ alias vpnoff='adguardvpn-cli disconnect'
 alias vpn='adguardvpn-cli status'
 
 ##  Utilities ##
-alias untar='tar -zxvf'
-alias wifi='nmcli dev wifi connect'
 alias ph='viewnior'
 alias gdb='gdb -x ~/.gdbinit'
 alias g='gdb'
@@ -128,6 +126,11 @@ alias actvenv='source .venv/bin/activate'
 alias chx='chmod +x'        # won't work on local user's cfg
 alias ch37='chmod 777'      # same
 alias um='uname -m'
+alias du='du -h'
+alias free='free -m'
+alias untar='tar -zxvf'
+alias wifi='nmcli dev wifi connect'
+
 
 # Else
 alias mc='make; make clean'  # makefiles make and clean at one action
@@ -137,6 +140,12 @@ alias moc='make clean'       # make only clean
 alias zshcp='cp ~/.zshrc ~/.my-cfgs/Shell/'
 alias bashcp='cp ~/.bashrc ~/.my-cfgs/Shell/'
 alias shellcp='zshcp; bashcp'
+
+# Books
+alias book_stolyarov1='zathura ~/Education/Materials/Books/progintro_e2v1.pdf'
+alias book_stolyarov2='zathura ~/Education/Materials/Books/progintro_e2v2.pdf'
+alias book_stolyarov3='zathura ~/Education/Materials/Books/progintro_e2v3.pdf'
+
 
 ### Paths ###
 
