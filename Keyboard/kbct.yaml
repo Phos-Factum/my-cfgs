@@ -18,3 +18,9 @@
 #        d: pagedown
 #        G: home
 #        gg: end
+
+# 1. From AUR download 'kbct-git', 'debugedit' and make 'pi --needed base-devel'
+# 2. Copy the daemon to /etc/systemd/system/ and yaml to /etc/
+# 3. sudo modprobe uinput
+# *. Else open dev's github and watch sth like "RUST BACKTRACE"
+# 2. 
