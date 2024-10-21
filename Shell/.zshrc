@@ -71,6 +71,7 @@ alias vpn='adguardvpn-cli status'
 alias ph='viewnior'
 alias gdb='gdb -x ~/.gdbinit'
 alias g='gdb'
+alias nd='nodemon'
 
 # Pomodoro
 alias p='pomodoro'
@@ -146,13 +147,16 @@ alias book_stolyarov1='zathura ~/Education/Materials/Books/progintro_e2v1.pdf'
 alias book_stolyarov2='zathura ~/Education/Materials/Books/progintro_e2v2.pdf'
 alias book_stolyarov3='zathura ~/Education/Materials/Books/progintro_e2v3.pdf'
 
+# My custom scripts
+alias saveit='cat >> ~/Education/Materials/Saved_Links'
+
 
 ### Paths ###
 
 PATH=${PATH}:~/.bin
 export PATH
 
-
+# Pomodoro #
 function pomo() {
     arg1=$1
     shift
