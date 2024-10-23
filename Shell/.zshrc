@@ -146,6 +146,8 @@ alias shellcp='zshcp; bashcp'
 alias book_stolyarov1='zathura ~/Education/Materials/Books/progintro_e2v1.pdf'
 alias book_stolyarov2='zathura ~/Education/Materials/Books/progintro_e2v2.pdf'
 alias book_stolyarov3='zathura ~/Education/Materials/Books/progintro_e2v3.pdf'
+alias book_swaroop='zathura ~/Education/Materials/Books/swaroop-byte_of_python.pdf'
+alias book_msu='zathura ~/Education/Materials/Books/msu-python_oop.pdf'
 
 # My custom scripts
 alias saveit='cat >> ~/Education/Materials/Saved_Links'

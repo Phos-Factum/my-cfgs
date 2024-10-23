@@ -12,3 +12,6 @@ else
 #   notify-send "Тачпад включен"
 fi
 
+# Чтобы работало нужно закинуть скрипт в /usr/bin (как пример) и в настройках
+# GNOME в кастомных шорткатах команде toggle-touchpad дать название и хоткей
+# Command: /home/phosphorus/.bin/toggle-touchpad  (no ./)

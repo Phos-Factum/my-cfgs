@@ -92,7 +92,11 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-### Aliases ###
+### Exports ###
+
+export EDITOR=/usr/bin/vim
+
+##### Aliases #####
 
 # Commands
 alias rmrf='rm -rf'
@@ -113,9 +117,9 @@ alias dcd='cd /etc/systemd/system/; ls'
 alias dls='ls /etc/systemd/system/'
 
 # Configs
-alias zshrc='vim ~/.zshrc; source ~/.zshrc'
-alias bashrc='vim ~/.bashrc; source ~/.bashrc'
-alias tmuxrc='vim ~/.tmux.conf; source ~/.tmux.conf'
+alias z='nvim ~/.zshrc; source ~/.zshrc; zshcp'
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc; bashcp'
+alias tmuxrc='nvim ~/.tmux.conf; source ~/.tmux.conf'
 
 # Package managers
 alias yi='yay -S'
@@ -135,13 +139,24 @@ alias denable='sudo systemctl enable'
 alias ddisable='sudo systemctl disable'
 alias vpnon='adguardvpn-cli connect'
 alias vpnoff='adguardvpn-cli disconnect'
+alias vpn='adguardvpn-cli status'
 
-# Utilities
-alias uz='tar -xzf'
-alias wifi='nmcli dev wifi connect'
+##  Utilities ##
 alias ph='viewnior'
-alias df='df -h'
-alias free='free -m'
+alias gdb='gdb -x ~/.gdbinit'
+alias g='gdb'
+alias nd='nodemon'
+
+# Pomodoro
+alias p='pomodoro'
+alias pstart='pomodoro start --duration'
+alias pstop='pomodoro finish'
+alias pcan='pomodoro cancel'
+alias pstatus='pomodoro status'
+alias pbreak='pomodoro break'
+alias prepeat='pomodoro repeat'
+
+################
 
 # Office
 alias writer='loffice'
@@ -152,7 +167,9 @@ alias base='lobase'
 alias draw='lodraw'
 alias pdf='zathura'
 
-## Git
+## Git ##
+
+# Git (short)
 alias gita='git add'
 alias gita.='git add .'
 alias gitd='git diff'
@@ -161,7 +178,8 @@ alias gitc='git commit'
 alias gitc-m='git commit -m'
 alias gitc--amend='git commit --amend'
 alias gits='git status'
-#
+
+# Git (less short :D)
 alias gitlog='git log'
 alias gitrm='git rm'
 alias gitmv='git mv'
@@ -172,13 +190,60 @@ alias gitpull='git pull'
 alias gitsw='git switch'
 alias gitch='git checkout'
 
+#########
+
 # Python
 alias py='python3'
 alias newvenv='python3 -m venv .venv'
 alias actvenv='source .venv/bin/activate'
 
+# System utilities
+alias chx='chmod +x'   # won't work on local user's cfg
+alias ch37='chmod 777' # same
+alias um='uname -m'
+alias du='du -h'
+alias free='free -m'
+alias untar='tar -zxvf'
+alias wifi='nmcli dev wifi connect'
+
 # Else
-# alias make='make; make clean'  # makefiles make and clean at one action
+alias mc='make; make clean' # makefiles make and clean at one action
+alias moc='make clean'      # make only clean
+
+# Lmao aliases
+alias zshcp='cp ~/.zshrc ~/.my-cfgs/Shell/'
+alias bashcp='cp ~/.bashrc ~/.my-cfgs/Shell/'
+alias shellcp='zshcp; bashcp'
+
+# Books
+alias book_stolyarov1='zathura ~/Education/Materials/Books/progintro_e2v1.pdf'
+alias book_stolyarov2='zathura ~/Education/Materials/Books/progintro_e2v2.pdf'
+alias book_stolyarov3='zathura ~/Education/Materials/Books/progintro_e2v3.pdf'
+alias book_swaroop='zathura ~/Education/Materials/Books/swaroop-byte_of_python.pdf'
+alias book_msu='zathura ~/Education/Materials/Books/msu-python_oop.pdf'
+
+# My custom scripts
+alias saveit='cat >> ~/Education/Materials/Saved_Links'
+
+### Paths ###
+
+PATH=${PATH}:~/.bin
+export PATH
+
+# Pomodoro #
+function pomo() {
+    arg1=$1
+    shift
+    args="$*"
+
+    min=${arg1:?Example: pomo 15 Take a break}
+    sec=$((min * 60))
+    msg="${args:?Example: pomo 15 Take a break}"
+
+    while true; do
+        sleep "${sec:?}" && echo "${msg:?}" && notify-send -u critical -t 0 "${msg:?}"
+    done
+}
 
 xhost +local:root >/dev/null 2>&1
 

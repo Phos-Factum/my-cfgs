@@ -1,0 +1,26 @@
+# Копирование текста в буфер обмена
+set selection-clipboard clipboard
+
+# Навигация на английской раскладке
+map normal h scroll left
+map normal j scroll down
+map normal k scroll up
+map normal l scroll right
+
+# Навигация на русской раскладке
+map normal р scroll left
+map normal о scroll down
+map normal л scroll up
+map normal д scroll right
+
+# Автосохранение позиции в документе
+set save-position true
+
+# Скрытие панели инструментов
+set statusbar visible
+
+# Автоматическое увеличение/уменьшение при открытии
+set adjust-open zoom
+
+
+# Путь к файлу: ~/.config/zathura/zathurarc
