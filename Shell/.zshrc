@@ -134,8 +134,8 @@ alias wifi='nmcli dev wifi connect'
 
 
 # Else
-alias mc='make; make clean'  # makefiles make and clean at one action
-alias moc='make clean'       # make only clean
+alias makeclean='make; make clean'  # makefiles make and clean at one action
+alias mclean='make clean'       # make only clean
 
 # Lmao aliases
 alias zshcp='cp ~/.zshrc ~/.my-cfgs/Shell/'
