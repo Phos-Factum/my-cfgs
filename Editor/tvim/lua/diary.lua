@@ -3,7 +3,7 @@ local config = require("deardiary.config")
 config.journals = {
 	{
 		path = "~/Diary/personal",
-		frequencies = { "daily", "weekly" },
+		frequencies = { "daily", "weekly", "monthly", "yearly" },
 	},
 	{
 		path = "~/Diary/work",

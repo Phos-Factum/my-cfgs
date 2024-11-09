@@ -48,7 +48,9 @@ alias bashrc='nvim ~/.bashrc; source ~/.bashrc; bashcp'
 alias tmuxrc='nvim ~/.tmux.conf; source ~/.tmux.conf'
 alias lvim='nvim -u ~/.config/nvim/init.lua'
 alias tvim='nvim -u ~/.config/tvim/init.lua'
+alias diary='tvim'
 alias tvimconf='lvim ~/.config/tvim/init.lua'
+alias tvimcp='cp -r ~/.config/tvim ~/.my-cfgs/Editor/'
 
 # Package managers
 alias yi='yay -S'

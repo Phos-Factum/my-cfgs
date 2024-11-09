@@ -73,25 +73,49 @@ vim.api.nvim_create_autocmd("FileType", {
 
 ---- Алиасы для удобного пользования дневником
 
-local function open_journal(command)
+local function open_journal(period)
 	-- Запускаем команду для выбора журнала
 	vim.cmd("DearDiarySelectJournal")
-
-	-- Выполняем нужную команду для открытия записи (Today, Tomorrow, или Yesterday)
-	vim.cmd(command)
+	-- Выполняем команду DearDiary для указанного периода
+	vim.cmd("DearDiary" .. period)
 end
 
--- Команда для открытия записи на сегодня
+-- Универсальная команда для открытия записи по временным периодам
+vim.api.nvim_create_user_command("TOpen", function(opts)
+	-- Проверяем, что аргумент был передан
+	if opts.args == "" then
+		print(
+			"Пожалуйста, укажите временной период (например, Today, LastMonth, NextYear)"
+		)
+		return
+	end
+	open_journal(opts.args)
+end, {
+	nargs = 1, -- Один аргумент (например, Today, LastMonth)
+	complete = function()
+		return {
+			"Today",
+			"Yesterday",
+			"Tomorrow",
+			"LastWeek",
+			"LastMonth",
+			"LastYear",
+			"NextWeek",
+			"NextMonth",
+			"NextYear",
+		}
+	end,
+})
+
+-- Отдельные команды для Today, Yesterday, Tomorrow
 vim.api.nvim_create_user_command("TToday", function()
-	open_journal("DearDiaryToday")
+	open_journal("Today")
 end, {})
 
--- Команда для открытия записи на завтра
-vim.api.nvim_create_user_command("TTomorrow", function()
-	open_journal("DearDiaryTomorrow")
-end, {})
-
--- Команда для открытия записи за вчера
 vim.api.nvim_create_user_command("TYesterday", function()
-	open_journal("DearDiaryYesterday")
+	open_journal("Yesterday")
+end, {})
+
+vim.api.nvim_create_user_command("TTomorrow", function()
+	open_journal("Tomorrow")
 end, {})
