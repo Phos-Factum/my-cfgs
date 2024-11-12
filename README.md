@@ -1,6 +1,15 @@
-# My GitHub repo with configs on Linux system
+# 👋 Welcome, I am Phosphorus!
 
-> If you found a mistake or you wanna give a recommendation -
-> you can write to me about this through my contacts.
+Hello and welcome to my linux (wish not only :D) configuration repository! Here you’ll find various **configurations**, **scripts**, and **utilities** that I've gathered to streamline workflows and improve effectivity.
 
-Hope, it can be useful for somebody...
+## 📚 About
+
+This repository includes:
+- **Useful scripts** for automating various tasks;
+- **Configuration files** for setting up editors and other tools;
+- **System utilities** for working with the keyboard and system, which can be helpful in everyday programming and administration.
+
+I hope these resources are useful and can assist you in your projects.
+
+### 💻 Success and, more importantly, love in programming! 
+
