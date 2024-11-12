@@ -10,7 +10,7 @@ dofile(vim.fn.expand("~/.config/tvim/lua/diary.lua"))
 vim.opt.number = true -- Включить номера строк
 vim.opt.wrap = true -- Включить перенос строк
 vim.opt.linebreak = true -- Перенос строк по словам
-vim.opt.textwidth = 90 -- Перенос по 90 символам
+vim.opt.textwidth = 80 -- Перенос по 90 символам
 -- vim.opt.spell = true -- Включить проверку орфографии
 -- vim.opt.spelllang = { "en", "ru" } -- Языки для проверки орфографии
 
@@ -100,6 +100,9 @@ end, {
 			"LastWeek",
 			"LastMonth",
 			"LastYear",
+			"ThisWeek",
+			"ThisMonth",
+			"ThisYear",
 			"NextWeek",
 			"NextMonth",
 			"NextYear",

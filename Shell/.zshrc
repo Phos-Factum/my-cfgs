@@ -51,6 +51,9 @@ alias tvim='nvim -u ~/.config/tvim/init.lua'
 alias diary='tvim'
 alias tvimconf='lvim ~/.config/tvim/init.lua'
 alias tvimcp='cp -r ~/.config/tvim ~/.my-cfgs/Editor/'
+alias plan='bat --paging=never ~/Diary/personal/daily/$(date +\%Y)/$(date +\%m)/$(date +\%d).md'
+alias today='tvim ~/Diary/personal/daily/$(date +\%Y)/$(date +\%m)/$(date +\%d).md'
+
 
 # Package managers
 alias yi='yay -S'
@@ -155,6 +158,7 @@ alias book_stolyarov2='zathura ~/Education/Materials/Books/progintro_e2v2.pdf'
 alias book_stolyarov3='zathura ~/Education/Materials/Books/progintro_e2v3.pdf'
 alias book_swaroop='zathura ~/Education/Materials/Books/swaroop-byte_of_python.pdf'
 alias book_msu='zathura ~/Education/Materials/Books/msu-python_oop.pdf'
+alias book_shotts='zathura ~/Education/Materials/Books/shotts-linux_cli.pdf'
 
 # My custom scripts
 alias saveit='cat >> ~/Education/Materials/Saved_Links'
@@ -179,3 +183,5 @@ function pomo() {
         sleep "${sec:?}" && echo "${msg:?}" && notify-send -u critical -t 0 "${msg:?}"
     done
 }
+
+
