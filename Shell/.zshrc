@@ -35,6 +35,7 @@ alias c='cd'
 alias c..='cd ..'
 alias c/='cd /'
 alias c-='cd -'
+alias cpr='cp -r'
 alias s='cat'
 alias md='mkdir'
 alias m='mv'
@@ -131,6 +132,8 @@ alias gitch='git checkout'
 alias py='python3'
 alias newvenv='python3 -m venv .venv'
 alias actvenv='source .venv/bin/activate'
+alias pipu='pip install --upgrade pip'
+alias pipl='pip list'
 
 # System utilities
 alias chx='chmod +x'        # won't work on local user's cfg
