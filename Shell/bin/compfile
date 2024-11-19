@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Проверка, что указан файл для компиляции
+if [ -z "$1" ]; then
+    echo "Использование: compfile <имя_файла> [дополнительные_флаги]"
+    echo "Скрипт автоматически определит компилятор по расширению файла."
+    exit 1
+fi
+
+# Извлечение имени файла и расширения
+filepath="$1"
+filename="${filepath%.*}"
+extension="${filepath##*.}"
+
+# Дополнительные флаги (все аргументы после $1)
+shift
+extra_flags="$@"
+
+# Унифицированные сообщения
+compile_success="Компиляция завершена успешно."
+compile_error="Ошибка компиляции."
+cleanup_message="Удалены временные файлы:"
+
+# Компиляция в зависимости от расширения файла
+case "$extension" in
+pas)
+    echo "Компиляция с помощью Free Pascal Compiler (fpc)"
+    fpc "$filepath" $extra_flags
+    if [ $? -eq 0 ]; then
+        echo "$compile_success"
+        # Удаление временных файлов Pascal
+        rm -f "$filename.o" "$filename.ppu" "$filename.a"
+        if [ $? -eq 0 ]; then
+            echo "$cleanup_message $filename.o $filename.ppu $filename.a"
+        fi
+    else
+        echo "$compile_error"
+    fi
+    ;;
+cpp)
+    echo "Компиляция с помощью G++ (g++)"
+    g++ "$filepath" -o "$filename" $extra_flags
+    if [ $? -eq 0 ]; then
+        echo "$compile_success"
+    else
+        echo "$compile_error"
+    fi
+    ;;
+c)
+    echo "Компиляция с помощью GCC (gcc)"
+    gcc "$filepath" -o "$filename" $extra_flags
+    if [ $? -eq 0 ]; then
+        echo "$compile_success"
+    else
+        echo "$compile_error"
+    fi
+    ;;
+asm)
+    echo "Компиляция с помощью NASM (nasm)"
+    nasm -f elf64 "$filepath" -o "$filename.o" && ld "$filename.o" -o "$filename" $extra_flags
+    if [ $? -eq 0 ]; then
+        echo "$compile_success"
+        # Удаление временных файлов NASM
+        rm -f "$filename.o"
+        if [ $? -eq 0 ]; then
+            echo "$cleanup_message $filename.o"
+        fi
+    else
+        echo "$compile_error"
+    fi
+    ;;
+*)
+    echo "Неизвестное расширение файла: $extension"
+    echo "Поддерживаемые расширения: .pas, .cpp, .c, .asm"
+    ;;
+esac
