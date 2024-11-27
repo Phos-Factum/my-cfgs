@@ -44,10 +44,7 @@ alias dcd='cd /etc/systemd/system/; ls'
 alias dls='ls /etc/systemd/system/'
 
 # Configs
-alias z='nvim ~/.zshrc; source ~/.zshrc; zshcp'
-alias bashrc='nvim ~/.bashrc; source ~/.bashrc; bashcp'
-alias tmuxrc='nvim ~/.tmux.conf; source ~/.tmux.conf'
-alias lvim='nvim -u ~/.config/nvim/init.lua'
+alias z='vim ~/.zshrc; source ~/.zshrc'
 alias tvim='nvim -u ~/.config/tvim/init.lua'
 alias diary='tvim'
 alias tvimconf='lvim ~/.config/tvim/init.lua'
