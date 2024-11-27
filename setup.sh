@@ -82,6 +82,10 @@ done
 # 9. Создание ссылок на директории для nvim и tvim
 echo "Создаём символические ссылки для nvim и tvim..."
 ln -sf "$CFG_DIR/Editor/nvim" "$CONFIG_DIR/nvim"
+if [ -e "$CONFIG_DIR/tvim" ]; then
+    echo "Удаляем существующий файл или ссылку: $CONFIG_DIR/tvim"
+    rm -rf "$CONFIG_DIR/tvim"
+fi
 ln -sf "$CFG_DIR/Editor/tvim" "$CONFIG_DIR/tvim"
 
 # 10. Установка YAY
@@ -103,25 +107,17 @@ yay -S --noconfirm kbct keepass
 # 12. Настройка клавиатуры (kbct)
 echo "Настраиваем клавиатуру (kbct)..."
 
-# Останавливаем и удаляем автоматически созданный kbct.service, если он существует
 sudo systemctl stop kbct.service || true
 sudo systemctl disable kbct.service || true
-
-# Убираем маскировку службы, если она замаскирована
 sudo systemctl unmask kbct.service || true
-
-# Удаляем старый файл kbct.service
 sudo rm -f /etc/systemd/system/kbct.service
 
-# Копируем пользовательский kbct.service
 echo "Копируем пользовательский kbct.service..."
 sudo cp "$CFG_DIR/Keyboard/kbct.service" /etc/systemd/system/kbct.service
 
-# Копируем конфигурацию kbct.yaml
 echo "Копируем конфигурацию kbct.yaml..."
 sudo cp "~/.my-cfgs/Keyboard/kbct.yaml" /etc/kbct.yaml
 
-# Перезапускаем службы systemd и включаем kbct.service
 echo "Активируем kbct.service..."
 sudo systemctl daemon-reload
 sudo systemctl enable kbct.service
