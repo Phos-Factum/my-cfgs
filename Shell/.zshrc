@@ -72,7 +72,7 @@ alias ddisable='sudo systemctl disable'
 alias vpnon='adguardvpn-cli connect'
 alias vpnoff='adguardvpn-cli disconnect'
 alias vpnstatus='adguardvpn-cli status'
-alias vpnlogin='adguard-cli login'
+alias vpnlogin='adguardvpn-cli login'
 
 ##  Utilities ##
 alias ph='viewnior'
