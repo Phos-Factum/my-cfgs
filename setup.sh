@@ -81,12 +81,12 @@ done
 
 # 9. Создание ссылок на директории для nvim и tvim
 echo "Создаём символические ссылки для nvim и tvim..."
-ln -sf "$CFG_DIR/Editor/nvim" "$CONFIG_DIR/nvim"
+cp -r "$CFG_DIR/Editor/nvim" "$CONFIG_DIR/nvim"
 if [ -e "$CONFIG_DIR/tvim" ]; then
-    echo "Удаляем существующий файл или ссылку: $CONFIG_DIR/tvim"
-    rm -rf "$CONFIG_DIR/tvim"
+    echo "Удаляем существующий файл или ссылку: $CONFIG_DIR/Editor/tvim/tvim"
+    rm -rf "$CONFIG_DIR/Editor/tvim/tvim"
 fi
-ln -sf "$CFG_DIR/Editor/tvim" "$CONFIG_DIR/tvim"
+cp -r "$CFG_DIR/Editor/tvim" "$CONFIG_DIR/tvim"
 
 # 10. Установка YAY
 if ! command -v yay &>/dev/null; then
