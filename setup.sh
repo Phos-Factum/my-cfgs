@@ -174,6 +174,8 @@ sudo systemctl start byedpi.service
 # Завершение
 echo "Для создания шортката для переключения тачпада в GNOME, введите следующую команду в настройках клавиатуры (в разделе 'Горячие клавиши' -> 'Добавить'):"
 echo "$HOME/.bin/toggle-touchpad"
+echo "Запускаем display-gnome-layout..."
+"$HOME/.bin/display-gnome-layout"
 
 # Удаляем директорию my-cfgs
 echo "Удаляем директорию $HOME/my-cfgs..."
