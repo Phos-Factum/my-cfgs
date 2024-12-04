@@ -13,9 +13,9 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
 # Starting tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#  exec tmux
+#fi
 
 ### Exports ###
 
@@ -71,10 +71,12 @@ alias dstatus='sudo systemctl status'
 alias denable='sudo systemctl enable'
 alias ddisable='sudo systemctl disable'
 alias dunmask='sudo systemctl unmask'
+alias drestart='sudo systemctl restart'
 alias vpnon='adguardvpn-cli connect'
 alias vpnoff='adguardvpn-cli disconnect'
 alias vpnstatus='adguardvpn-cli status'
 alias vpnlogin='adguardvpn-cli login'
+alias vpnlogout='adguardvpn-cli logout'
 
 ##  Utilities ##
 alias ph='viewnior'
