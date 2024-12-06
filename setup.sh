@@ -139,26 +139,9 @@ fi
 echo "Синхронизируем плагины через lazy.nvim..."
 nvim +LazySync +qa
 
-# 9. Настройка клавиатуры (kbct)
-echo "Настраиваем клавиатуру (kbct)..."
-
-sudo systemctl stop kbct.service || true
-sudo systemctl disable kbct.service || true
-sudo systemctl unmask kbct.service || true
-sudo rm -f /etc/systemd/system/kbct.service
-
-echo "Копируем пользовательский kbct.service..."
-sudo cp "$CFG_DIR/Keyboard/kbct.service" /etc/systemd/system/kbct.service
-
-echo "Копируем конфигурацию kbct.yaml..."
-sudo cp "~/.my-cfgs/Keyboard/kbct.yaml" /etc/kbct.yaml
-
-echo "Активируем kbct.service..."
-sudo systemctl daemon-reload
-sudo systemctl enable kbct.service
-sudo systemctl start kbct.service
-
-echo "Настройка kbct завершена."
+# 9. Запуск настройки kbct из скрытого скрипта
+echo "Настроим kbct с помощью скрытого скрипта..."
+bash "$HOME/.kbct-activator.sh"
 
 # 10. Установка и настройка byedpi
 echo "Устанавливаем byedpi..."
