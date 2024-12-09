@@ -3,7 +3,7 @@ Description=Keyboard Customization Tool
 After=network.target
 
 [Service]
-ExecStart=kbct remap --config /etc/kbct.yaml
+ExecStart=sudo kbct remap --config /etc/kbct.yaml
 Restart=always
 
 [Install]

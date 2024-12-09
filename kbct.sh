@@ -4,6 +4,7 @@
 echo "Настраиваем клавиатуру (kbct)..."
 
 # Остановка и удаление старых сервисов
+sudo modprobe uinput
 sudo systemctl stop kbct.service || true
 sudo systemctl disable kbct.service || true
 sudo systemctl unmask kbct.service || true
