@@ -141,7 +141,7 @@ nvim +LazySync +qa
 
 # 9. Запуск настройки kbct из скрытого скрипта
 echo "Настроим kbct с помощью скрытого скрипта..."
-bash "$HOME/.kbct-activator.sh"
+bash "$HOME/.my-cfgs/Shell/bin/kbct.sh"
 
 # 10. Установка и настройка byedpi
 echo "Устанавливаем byedpi..."
